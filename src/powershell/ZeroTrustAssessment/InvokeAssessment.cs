@@ -102,7 +102,7 @@ public class InvokeAssessment : PSCmdlet
             }
 
             var scopes = new[] {"Agreement.Read.All", "CrossTenantInformation.ReadBasic.All", "Directory.Read.All", "Policy.Read.All", "User.Read", "DeviceManagementServiceConfig.Read.All",
-            "DeviceManagementConfiguration.Read.All", "DeviceManagementRBAC.Read.All", "DeviceManagementConfiguration.Read.All", "DeviceManagementApps.Read.All",
+            "DeviceManagementConfiguration.Read.All", "DeviceManagementRBAC.Read.All", "DeviceManagementApps.Read.All",
             "RoleAssignmentSchedule.Read.Directory","RoleEligibilitySchedule.Read.Directory", "PrivilegedEligibilitySchedule.Read.AzureADGroup" };
 
             AccessToken = SignInUserAndGetTokenUsingMsal(app, scopes).GetAwaiter().GetResult();
@@ -134,8 +134,13 @@ public class InvokeAssessment : PSCmdlet
             gen.GenerateDocumentAsync(graphData, pptxGraphData, stream, configOptions).GetAwaiter().GetResult();
             stream.Position = 0;
         }
+        WriteInformation("", Consts.WriteInformationTagHost);
         WriteInformation($"Assessment completed.", Consts.WriteInformationTagHost);
+        WriteInformation("", Consts.WriteInformationTagHost);
+        WriteInformation($"This assessment report does not include the workshop roadmaps. The workshop roadmaps can be downloaded at aka.ms/ztworkshop", Consts.WriteInformationTagHost);
+        WriteInformation("", Consts.WriteInformationTagHost);
         WriteInformation($"View assessment results {saveFilePath}", Consts.WriteInformationTagHost);
+        WriteInformation("", Consts.WriteInformationTagHost);
     }
 
     // This method will be called once at the end of pipeline execution; if no input is received, this method is not called
